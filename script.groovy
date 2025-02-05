@@ -1,7 +1,8 @@
 def buildJar() {
     echo "building the application..."
-    sh 'mvn package'
-} 
+    sh 'mvn clean test'   // Ejecuta los tests
+    sh 'mvn package'      // Empaqueta la aplicación después de los tests
+}
 
 def buildImage() {
     echo "building the docker image..."
