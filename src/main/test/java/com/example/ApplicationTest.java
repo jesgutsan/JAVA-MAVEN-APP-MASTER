@@ -1,11 +1,12 @@
 package com.example;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+
 
 public class ApplicationTest {
     @Test
     public void testApp() {
-        assertTrue(true); // Prueba básica que siempre pasará
+        assertTrue(true); 
     }
 }
