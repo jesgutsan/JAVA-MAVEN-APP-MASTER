@@ -1,4 +1,5 @@
 def gv
+
 pipeline {
     agent any
     parameters{
@@ -6,7 +7,7 @@ pipeline {
         booleanParam(name: 'executeTest', defaultValue: true, description: '')
     }
     stages {
-        stage("init") {
+        stage("Build") {
             steps {
                 echo 'Building..'
                 sh "mvn --version"
@@ -20,6 +21,9 @@ pipeline {
                    parmams.executeTest
                 }
             }
+        }
+        steps {
+            echo 'Testing..'
         }
         stage("deploy") {
             steps {
