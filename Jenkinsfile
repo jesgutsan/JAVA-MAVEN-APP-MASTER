@@ -7,7 +7,7 @@ pipeline {
         booleanParam(name: 'executeTest', defaultValue: true, description: '')
     }
     stages {
-        stage("Build") {
+        stage('Build') {
             steps {
                 echo 'Building..'
                 sh "mvn --version"
@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stage("Test") {
+        stage('Test') {
             when{
                 expression{
                    params.executeTest
@@ -25,7 +25,7 @@ pipeline {
         steps {
             echo 'Testing..'
         }
-        stage("deploy") {
+        stage('deploy') {
             steps {
                 echo 'Deploying..'
                 echo "Deploying version ${params.VERSION}"
