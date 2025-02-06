@@ -10,10 +10,18 @@ pipeline {
         booleanParam(name: 'executeTest', defaultValue: true, description: '')
     }
     stages {
+        stage('init') {
+            steps{
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage("Build") {
             steps {
-                echo 'Building..'
-                sh "mvn --version"
+                script {
+                    gv.buildApp()
+                }
             }
         }
 
@@ -22,14 +30,17 @@ pipeline {
                 expression { params.executeTest }
             }
             steps {
-                echo 'Testing..'
+                script {
+                    gv.testApp()
+                }
             }
         }
 
         stage("Deploy") {
             steps {
-                echo 'Deploying..'
-                echo "Deploying version ${params.VERSION}"
+                script {
+                    gv.deployApp()
+                }
             }
         }
     }
