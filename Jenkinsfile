@@ -1,34 +1,31 @@
 def gv
-
 pipeline {
     agent any
+    parameters{
+        coice(name: 'VERSION', choices:['1.11.0', '1.2.0', '1.3.0'], dexription: '')
+        booleanParam(name: 'executeTest', defaultValue: true, description: '')
+    }
     stages {
         stage("init") {
             steps {
-                script {
-                    gv = load "script.groovy"
-                }
+                echo 'Building..'
+                sh "mvn --version"
+                
             }
         }
-        stage("build jar") {
-            steps {
-                script {
-                    echo "building jar"
-                }
-            }
-        }
-        stage("build image") {
-            steps {
-                script {
-                   echo "building image"
+        
+        stage("Test") {
+            when{
+                expression{
+                   parmams.executeTest
                 }
             }
         }
         stage("deploy") {
             steps {
-                script {
-                    echo "deploying"
-                }
+                echo 'Deploying..'
+                echo "Deploying version ${params.VERSION}"
+                
             }
         }
     }
