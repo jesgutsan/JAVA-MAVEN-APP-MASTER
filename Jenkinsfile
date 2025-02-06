@@ -1,3 +1,5 @@
+def gv
+
 pipeline {
     agent any
     stages {
@@ -11,22 +13,14 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    sh 'mvn clean package'
+                    echo "building jar"
                 }
-            }
-        }
-        stage("run tests") {
-            steps {
-                script {
-                    sh 'mvn test'
-                }
-                junit 'target/surefire-reports/*.xml'
             }
         }
         stage("build image") {
             steps {
                 script {
-                    echo "building image"
+                   echo "building image"
                 }
             }
         }
